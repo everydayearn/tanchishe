@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+			font-size: 12px;
+		}
+		body {
+			position: relative;
+		}
+		.row{
+			width: 600px;
+			height: 30px;
+			overflow: hidden;
+		}
+		.box{
+			border: 1px solid blue;
+			width: 600px;
+			height: 600px;
+			margin: 0 auto;
+		}
+		.small{
+			width: 30px;
+			height: 30px;
+			box-sizing: border-box;
+			border: 1px solid #ccc;
+			float: left;
+		}
+		.kongjian {
+			width: 200px;
+			height: 300px;
+			border: 10px solid #eee;
+			position: absolute;
+			left: 50%;
+			margin-left: -522px;
+			top: 50px;
+
+		}
+		.kongjian .button {
+			width: 190px;
+			height: 90px;
+			line-height: 100px;
+			font-size: 30px;
+			color: yellowgreen;
+			text-align: center;
+			background-color: #eef;
+			border: 5px solid #ee3;
+			cursor: pointer;
+		}
+		.kongjian .button:hover {
+			background-color:#aef; 
+		}
+	</style>
+</head>
+<body>
+	<div class="kongjian" id="kongjian">
+		<div class="button" id="kaishi">开始游戏</div>
+		<div class="button" id="moshi">恢复游戏</div>
+		<div class="button" id="jieshu">结束游戏</div>
+	</div>
+	<script type="text/javascript" src="js/Game.js"></script>
+	<script type="text/javascript" src="js/Snake.js"></script>
+	<script type="text/javascript" src="js/Snake1.js"></script>
+	<script type="text/javascript" src="js/Map.js"></script>
+	<script type="text/javascript" src="js/Food.js"></script>
+	<script type="text/javascript" src="js/Block.js"></script>
+	<script type="text/javascript">
+		//初始化地图
+		var map = new Map(20, 20);
+		//定义蛇图片对象；
+		var snakeObj = {
+			headp : ["img/1.png", "img/2.png", "img/3.png", "img/4.png"],
+			bodyp : ["img/5.png"],
+			tailp : ["img/6.png", "img/7.png", "img/8.png", "img/9.png"]
+		}
+		//初始蛇；
+		var snake = new Snake(snakeObj);
+		var snake1 = new Snake1(snakeObj);
+		//初始化实物；
+		var food = new Food(2, 6, "img/food.jpg");
+		//初始化障碍物；
+		var block = new Block("img/block.png");
+		//初始化game；
+		var game = new Game(map, snake, snake1, food, block);
+
+		var kaishi = document.getElementById("kaishi");
+		var moshi = document.getElementById("moshi");
+		var jieshu = document.getElementById("jieshu");
+		//绑定事件
+		kaishi.onmousedown = function() {
+			game.start();
+		}
+		jieshu.onmousedown = function() {
+			game.endjieshu();
+			// this.innerHTML = "恢复游戏"
+		}
+	
+	</script>
+</body>
+</html>
